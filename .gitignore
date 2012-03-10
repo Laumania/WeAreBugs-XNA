@@ -1,4 +1,8 @@
 
-_ReSharper.BugsXNA/
-src/BugsXNA/BugsXNA/bin/
+_ReSharper.*
+bin/
 obj/
+*.suo
+*.user
+*.cachefile
+PerformanceLogs/

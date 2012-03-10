@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -12,15 +13,16 @@ using Microsoft.Xna.Framework.Media;
 
 namespace BugsXNA.Models
 {
-    /// <summary>
-    /// This is a game component that implements IUpdateable.
-    /// </summary>
-    public class DynamicModel : Microsoft.Xna.Framework.GameComponent
+    public class DynamicModel : DrawableGameComponent
     {
         public DynamicModel(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            //default
+            Rotation = 0f;
+            Position = Vector2.Zero;
+            Scale = 1f;
+            Front = Vector2.Zero;
         }
 
         /// <summary>
@@ -40,9 +42,31 @@ namespace BugsXNA.Models
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
-
+            Rotation = (float)(Math.Atan2(Front.Y, Front.X) - Math.PI / 2.0);
             base.Update(gameTime);
         }
+
+        public override void Draw(GameTime gameTime)
+        {
+            var origin = new Vector2(Texture.Width / 2, Texture.Height / 2); //This to make the rotation point the center
+            base.Draw(gameTime);
+            BugsGame.Instance.SpriteBatch.Begin();
+            BugsGame.Instance.SpriteBatch.Draw(Texture,
+                                 Position,
+                                 new Rectangle(0, 0, Texture.Width, Texture.Height),
+                                 Color.White,
+                                 Rotation,
+                                 origin,
+                                 Scale,
+                                 SpriteEffects.None,
+                                 1.0f);
+            BugsGame.Instance.SpriteBatch.End();
+        }
+
+        public float Rotation { get; set; }
+        public Vector2 Position { get; set; }
+        public float Scale { get; set; }
+        public Vector2 Front { get; set; }
+        protected Texture2D Texture { get; set; }
     }
 }

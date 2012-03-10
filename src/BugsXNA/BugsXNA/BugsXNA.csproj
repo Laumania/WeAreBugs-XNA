@@ -65,7 +65,15 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\IBehavior.cs" />
+    <Compile Include="Behaviors\PursueAgentBehavior.cs" />
+    <Compile Include="Behaviors\SeekPointBehavior.cs" />
+    <Compile Include="Behaviors\SeperationBehavior.cs" />
+    <Compile Include="Common\Mathematics.cs" />
+    <Compile Include="Models\AgentModel.cs" />
+    <Compile Include="Models\BugModel.cs" />
     <Compile Include="Models\DynamicModel.cs" />
+    <Compile Include="Models\EnemyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\AppManifest.xml">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
@@ -78,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
+    <None Include="Notes.txt" />
     <Content Include="PhoneGameThumb.png">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </Content>
@@ -92,7 +101,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Behaviors\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
