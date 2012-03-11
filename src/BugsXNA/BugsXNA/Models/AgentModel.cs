@@ -64,7 +64,6 @@ namespace BugsXNA.Models
                 Vector2 acceleration = Mathematics.Multiply(SteeringForce, 1f / Mass);
                 Velocity = Mathematics.Add(Velocity, acceleration);
                 Position = Mathematics.Add(Position, Velocity);
-                Vector2.Multiply(Position, (float)gameTime.ElapsedGameTime.TotalSeconds);
 
                 float speed = Mathematics.Length(Velocity);
                 if (speed > _speedThreshold)

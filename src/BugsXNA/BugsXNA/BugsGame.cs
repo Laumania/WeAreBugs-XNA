@@ -42,8 +42,9 @@ namespace BugsXNA
             //Set Content root directory
             Content.RootDirectory = "Content";
 
-            // Frame rate is 30 fps by default for Windows Phone.
-            TargetElapsedTime = TimeSpan.FromTicks(333333);
+            // Frame rate is 30 fps by default for Windows Phone
+            // The original "WeAreBugs" runs at 60 fps - so we do that too in XNA
+            TargetElapsedTime = TimeSpan.FromSeconds(1f / 60f);
 
             // Extend battery life under lock.
             InactiveSleepTime = TimeSpan.FromSeconds(1);
@@ -192,7 +193,7 @@ namespace BugsXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkBlue);
             base.Draw(gameTime);
         }
 
