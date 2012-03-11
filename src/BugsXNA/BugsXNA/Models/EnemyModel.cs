@@ -37,7 +37,7 @@ namespace BugsXNA.Models
         protected override void LoadContent()
         {
             base.LoadContent();
-            Texture = BugsGame.Instance.Content.Load<Texture2D>("Enemy");
+            Texture = Game.Content.Load<Texture2D>("Enemy");
         }
 
         /// <summary>

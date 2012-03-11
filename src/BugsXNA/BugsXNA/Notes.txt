@@ -1,1 +1,2 @@
-﻿
+﻿XNA like float better than double, so alot of doubles have been made to floats.
+Almost all Update(dt) have been changed to Update(gameTime) as that's what XNA uses

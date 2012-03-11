@@ -12,9 +12,12 @@ using Microsoft.Xna.Framework.Media;
 
 namespace BugsXNA.Models
 {
-    public class BugModel : AgentModel
+    /// <summary>
+    /// This is a game component that implements IUpdateable.
+    /// </summary>
+    public class FoodModel : AgentModel
     {
-        public BugModel(Game game)
+        public FoodModel(Game game)
             : base(game)
         {
             // TODO: Construct any child components here
@@ -32,7 +35,7 @@ namespace BugsXNA.Models
         protected override void LoadContent()
         {
             base.LoadContent();
-            Texture = Game.Content.Load<Texture2D>("Bug");
+            Texture = Game.Content.Load<Texture2D>("Food");
         }
 
         /// <summary>
@@ -42,11 +45,6 @@ namespace BugsXNA.Models
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
         }
     }
 }
