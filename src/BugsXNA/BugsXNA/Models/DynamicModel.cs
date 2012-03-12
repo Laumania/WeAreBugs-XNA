@@ -36,6 +36,14 @@ namespace BugsXNA.Models
             base.Initialize();
         }
 
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+            if (Texture != null)
+                Texture.Dispose();
+            Texture = null;
+        }
+
         /// <summary>
         /// Allows the game component to update itself.
         /// </summary>
