@@ -77,6 +77,9 @@
     <Compile Include="Models\EnemyModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
     <Compile Include="Models\GameModel.cs" />
+    <Compile Include="Models\GameOverState.cs" />
+    <Compile Include="Models\PlayState.cs" />
+    <Compile Include="Models\ReadyState.cs" />
     <Compile Include="Models\StartState.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

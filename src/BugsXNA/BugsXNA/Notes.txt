@@ -1,2 +1,6 @@
-﻿XNA like float better than double, so alot of doubles have been made to floats.
-Almost all Update(dt) have been changed to Update(gameTime) as that's what XNA uses
+﻿- XNA like float better than double, so alot of doubles have been made to floats.
+- Almost all Update(dt) have been changed to Update(gameTime) as that's what XNA uses
+- As XNA doesn't have "Views" in the same seperated way as Silverlight, I'm using the States 
+as my "Views". This means that the Clicked event is on the states and not in the view.
+Yeah I know, it's not pretty, but it were the best solution I could come up with 
+while trying to stay as close as possible to the original source.

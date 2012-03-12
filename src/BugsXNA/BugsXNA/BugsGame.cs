@@ -21,17 +21,19 @@ namespace BugsXNA
     /// </summary>
     public class BugsGame : Microsoft.Xna.Framework.Game
     {
-        private readonly GraphicsDeviceManager graphics;
-        private Controller _controller;
-
-        //private float _seekPointRampDistance = 50; //distance at which the bug will start slowing its approach.
+        private readonly GraphicsDeviceManager _graphics;
+        private readonly Controller _controller;
 
         public BugsGame()
         {
-            BugsGame.Instance = this; 
+            BugsGame.Instance = this;
+            _controller = new Controller(this);
+
+            //Setup touch capabilities
+            TouchPanel.EnabledGestures = GestureType.Tap; 
             
             //Instansiate and setup graphics device manager
-            graphics = new GraphicsDeviceManager(this)
+            _graphics = new GraphicsDeviceManager(this)
                            {
                                IsFullScreen = true,
                                PreferredBackBufferHeight = 480,
@@ -50,8 +52,6 @@ namespace BugsXNA
             InactiveSleepTime = TimeSpan.FromSeconds(1);
         }
 
-        //public BugModel BugModel { get; set; }
-        
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -60,91 +60,9 @@ namespace BugsXNA
         /// </summary>
         protected override void Initialize()
         {
-            _controller = new Controller(this);
             _controller.Initialize();
-
-
-
-            //_enemyList = new List<AgentModel>();
-            //TargetPoint = Vector2.Zero;
-
-            //BugModel = new BugModel(this);
-            //BugModel.Add(new SeekPointBehavior(() => this.GetTarget(), _seekPointRampDistance));
-
-
-            //Components.Add(BugModel);
-            //Components.Add(CreateEnemyModel());
-            //Components.Add(CreateEnemyModel());
-            //Components.Add(CreateEnemyModel());
-
             base.Initialize();
         }
-
-        //public void UpdateEnemies(GameTime gameTime)
-        //{
-        //    bool bugIsCaught = false;
-        //    foreach (EnemyModel enemyModel in _enemyList)
-        //    {
-        //        float distance = Mathematics.Distance(enemyModel.Position, BugModel.Position);
-        //        enemyModel.Excitement = Math.Max(0, (_enemyExcitementThreshold - distance) / _enemyExcitementThreshold);
-        //        enemyModel.Update(gameTime);
-        //        if (distance < 15)
-        //        {
-        //            bugIsCaught = true;
-        //        }
-        //    }
-        //}
-
-        //public Vector2 GetTarget()
-        //{
-        //    return TargetPoint;
-        //}
-
-        //private List<AgentModel> _enemyList;
-        //private float _foodThreshold = 20; //disttance at which the bug is considered to have eaten the food.
-        //private float _foodPlacementBorderWidth = 100; //defines box where food can be placed.
-        //private float _enemyCreationBufferWidth = 20;
-        //private float _enemyAtBugThreshold = 20; //distance at which the enemy is considered to have caught the bug.
-        //private float _enemyPredictionFactor = 0f; //distance the enemy will "lead" the bug while pursuing.
-        //private float _enemySeperationFactor = 15f; //minimum distance between enemies.
-        //private float _enemyMaxSpeedLowRange = 1.5f; //low end value for random MaxSpeed
-        //private float _enemyMaxSpeedHighRange = 5.7f; //high end value for random MaxSpeed
-        //private float _enemyMaxForceLowRange = .01f; //low end value for random MaxForce
-        //private float _enemyMaxForceHighRange = .032f; //high end value for random MaxForce
-        //private float _enemyExcitementThreshold = 150; //the distance from the bug at which the enemy becomes excited (turns color)
-        //private Random _rnd = new Random();
-
-        //private EnemyModel CreateEnemyModel()
-        //{
-        //    EnemyModel enemyModel = new EnemyModel(this);
-        //    enemyModel.Front = new Vector2(0, -1);
-        //    enemyModel.Mass = .2f;
-        //    enemyModel.Scale = Mathematics.Lerp(.4f, .8f, (float)_rnd.NextDouble());
-
-        //    enemyModel.MaxSpeed = (float)Mathematics.Lerp(_enemyMaxSpeedLowRange, _enemyMaxSpeedHighRange, (float)_rnd.NextDouble());
-        //    enemyModel.MaxForce = (float)Mathematics.Lerp(_enemyMaxForceLowRange, _enemyMaxForceHighRange, (float)_rnd.NextDouble());
-
-        //    int quadrant = _rnd.Next(1, 5);
-        //    switch (quadrant)
-        //    {
-        //        case 1:
-        //            enemyModel.Position = new Vector2((float)_rnd.NextDouble() * Width, -_enemyCreationBufferWidth);
-        //            break;
-        //        case 2:
-        //            enemyModel.Position = new Vector2(Width + _enemyCreationBufferWidth, (float)_rnd.NextDouble() * Height);
-        //            break;
-        //        case 3:
-        //            enemyModel.Position = new Vector2((float)_rnd.NextDouble() * Width, Width + _enemyCreationBufferWidth);
-        //            break;
-        //        default:
-        //            enemyModel.Position = new Vector2(-_enemyCreationBufferWidth, (float)_rnd.NextDouble() * Height);
-        //            break;
-        //    }
-        //    enemyModel.Initialize();
-        //    enemyModel.Add(new PursueAgentBehavior(_enemyAtBugThreshold, _enemyPredictionFactor, BugModel));
-        //    enemyModel.Add(new SeperationBehavior(_enemySeperationFactor, _enemyList));
-        //    return enemyModel;
-        //}
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -179,13 +97,8 @@ namespace BugsXNA
 
             _controller.Update(gameTime);
 
-        
-            //UpdateEnemies(gameTime);
-
             base.Update(gameTime);
         }
-
-        
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -198,9 +111,8 @@ namespace BugsXNA
         }
 
         public SpriteBatch SpriteBatch { get; private set; }
-        //public Vector2 TargetPoint { get; set; }
-        public int Width { get { return graphics.PreferredBackBufferWidth; } }
-        public int Height { get { return graphics.PreferredBackBufferHeight; } }
+        public int Width { get { return _graphics.PreferredBackBufferWidth; } }
+        public int Height { get { return _graphics.PreferredBackBufferHeight; } }
 
         public static BugsGame Instance { get; private set; }
     }

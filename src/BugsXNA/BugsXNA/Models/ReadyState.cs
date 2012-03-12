@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugsXNA.Behaviors;
-using BugsXNA.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 
 namespace BugsXNA.Models
 {
-    public class StartState : State
+    public class ReadyState : State
     {
         public event EventHandler Clicked;
 
@@ -17,12 +15,13 @@ namespace BugsXNA.Models
         #endregion
 
         #region public methods
-        public StartState(GameModel gameModel)
+        public ReadyState(GameModel gameModel)
             : base(gameModel) { }
 
         public override void Enter()
         {
-            _gameModel.BugModel.Add(new SeekPointBehavior(() => _gameModel.GetTarget(), _seekPointRampDistance));
+            _gameModel.BugModel.Position = new Vector2(400, 300);
+            _gameModel.BugModel.Front = new Vector2(0, -1);
         }
 
         public override void Update(GameTime gameTime)
@@ -31,19 +30,19 @@ namespace BugsXNA.Models
             {
                 if (Clicked != null) Clicked(this, null);
             }
-
-            _gameModel.TargetPoint = _gameModel.FoodModel.Position;
             //_gameModel.BugModel.Update(gameTime);
-
-            if (Mathematics.Distance(_gameModel.BugModel.Position, _gameModel.FoodModel.Position) < _foodThreshold)
-            {
-                _gameModel.SetFood();
-            }
         }
 
+        public override void Exit()
+        {
+
+        }
+        #endregion
+
+        #region private methods
         private bool IsScreenTapped()
         {
-            if (TouchPanel.IsGestureAvailable)
+            if(TouchPanel.IsGestureAvailable)
             {
                 var gesture = TouchPanel.ReadGesture();
                 if (gesture.GestureType == GestureType.Tap)
@@ -52,14 +51,6 @@ namespace BugsXNA.Models
 
             return false;
         }
-
-        public override void Exit()
-        {
-            _gameModel.BugModel.ClearBehaviors();
-        }
-        #endregion
-
-        #region private methods
         #endregion
 
         #region eventhandlers
@@ -69,9 +60,6 @@ namespace BugsXNA.Models
         #endregion
 
         #region private variables
-        private float _seekPointRampDistance = 50; //distance at which the bug will start slowing its approach.
-        private float _foodThreshold = 20; //disttance at which the bug is considered to have eaten the food.
         #endregion
-
     }
 }
