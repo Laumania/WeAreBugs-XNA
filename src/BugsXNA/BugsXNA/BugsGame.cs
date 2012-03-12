@@ -23,6 +23,7 @@ namespace BugsXNA
     {
         private readonly GraphicsDeviceManager _graphics;
         private readonly Controller _controller;
+        private Texture2D _backgroundTexture;
 
         public BugsGame()
         {
@@ -72,6 +73,7 @@ namespace BugsXNA
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+            _backgroundTexture = this.Content.Load<Texture2D>("Background");
         }
 
         /// <summary>
@@ -106,8 +108,16 @@ namespace BugsXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkBlue);
+            GraphicsDevice.Clear(Color.Black);
+            DrawBackground();
             base.Draw(gameTime);
+        }
+
+        private void DrawBackground()
+        {
+            SpriteBatch.Begin();
+            SpriteBatch.Draw(_backgroundTexture, new Rectangle(0, 0, 800, 480), Color.White);
+            SpriteBatch.End();
         }
 
         public SpriteBatch SpriteBatch { get; private set; }
