@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="BugsSL.Views.ReadyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="800" Height="480">
+    <Grid x:Name="LayoutRoot" Background="Transparent" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp" >
+        <StackPanel
+            Background="Transparent"
+            Margin="0,100"
+            Width="350">
+            <TextBlock
+                Text="Steer with the mouse"                
+                Height="30"
+                HorizontalAlignment="Center"
+                FontSize="14"
+                Style="{StaticResource TextBlockStyle}"
+                />
+            <TextBlock
+                Text="Eat the white food dots for points"
+                FontSize="14"
+                Height="160"
+                HorizontalAlignment="Center"
+                Style="{StaticResource TextBlockStyle}"
+                />
+            <TextBlock
+                Text="click to start"
+                FontSize="12"
+                Height="20"
+                HorizontalAlignment="Center"
+                Style="{StaticResource TextBlockStyle}"
+                />
+        </StackPanel>
+    </Grid>
+</UserControl>

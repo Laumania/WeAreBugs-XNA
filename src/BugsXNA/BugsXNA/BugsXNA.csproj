@@ -104,8 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugsXNAContent\BugsXNAContent.contentproj">
-      <Name>BugsXNAContent</Name>
+      <Name>BugsXNAContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{2525FBA2-ADFF-419D-BB07-325F92AB690C}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

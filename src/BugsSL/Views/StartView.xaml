@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="BugsSL.Views.StartView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="800" Height="480">
+    <Grid x:Name="LayoutRoot" Background="Transparent" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
+        <StackPanel
+            Background="Transparent"
+            Margin="225,100"
+            Width="350">
+            <TextBlock
+                Text="'To a good approximation, all species are insects'"                
+                Height="34"
+                HorizontalAlignment="Center"
+                FontSize="14"
+                FontStyle="Italic"
+                Style="{StaticResource TextBlockStyle}"
+                />
+            <TextBlock
+                Text="                                                                -Robert May"
+                FontSize="12"
+                Height="125"
+                HorizontalAlignment="Center"
+                FontStyle="Italic"
+                Style="{StaticResource TextBlockStyle}"
+                />
+            <TextBlock
+                Text="click to continue"
+                FontSize="12"
+                Height="73"
+                HorizontalAlignment="Center"
+                Style="{StaticResource TextBlockStyle}"
+                />
+            <TextBlock
+                Text="We Are Bugs!"
+                FontSize="10"
+                Height="20"
+                HorizontalAlignment="Center"
+                FontStyle="Italic"
+                Style="{StaticResource TextBlockStyle}"
+                />
+            <TextBlock
+                Text="Created By Jeff Weber"
+                FontSize="10"
+                Height="20"
+                HorizontalAlignment="Center"
+                FontStyle="Italic"
+                Style="{StaticResource TextBlockStyle}"
+                />
+        </StackPanel>
+    </Grid>
+</UserControl>

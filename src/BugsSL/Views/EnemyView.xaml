@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="BugsSL.Views.EnemyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="30" Height="25">
+    <Canvas>
+        <Path x:Name="Body" Height="25" Width="28" Canvas.Left="-0.52" Canvas.Top="0.56" Stretch="Fill" Stroke="#ffFFFFFF" StrokeThickness="3" Data="M28.9,3.35 L-0.56,18.65 L-0.60,0.61 L28.87,15.64 z">
+        </Path>
+        <Path Height="2.3" Width="8" Canvas.Left="26.3" Canvas.Top="5.9" Stretch="Fill" Stroke="White" Data="M29.16,3.52 L36.1,4.9"/>
+        <Path Height="2.3" Width="8" Canvas.Left="26.5" Canvas.Top="17.9" Stretch="Fill" Stroke="White" Data="M28.52,15.7 L34.9,14.32"/>
+    </Canvas>
+</UserControl>
