@@ -4,3 +4,5 @@
 as my "Views". This means that the Clicked event is on the states and not in the view.
 Yeah I know, it's not pretty, but it were the best solution I could come up with 
 while trying to stay as close as possible to the original source.
+- The original states have been rewritten to "Screens". A Screen can be seens as a View+State if you think in the original Silverlight code
+- I use the "Game State Management" sample from here: http://create.msdn.com/en-US/education/catalog/sample/game_state_management

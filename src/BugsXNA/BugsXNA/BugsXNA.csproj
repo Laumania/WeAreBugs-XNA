@@ -69,6 +69,12 @@
     <Compile Include="Behaviors\PursueAgentBehavior.cs" />
     <Compile Include="Behaviors\SeekPointBehavior.cs" />
     <Compile Include="Behaviors\SeperationBehavior.cs" />
+    <Compile Include="Common\GameStateManagement\GameScreen.cs" />
+    <Compile Include="Common\GameStateManagement\InputAction.cs" />
+    <Compile Include="Common\GameStateManagement\InputState.cs" />
+    <Compile Include="Common\GameStateManagement\IScreenFactory.cs" />
+    <Compile Include="Common\GameStateManagement\ScreenFactory.cs" />
+    <Compile Include="Common\GameStateManagement\ScreenManager.cs" />
     <Compile Include="Common\Mathematics.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Models\AgentModel.cs" />
@@ -109,7 +115,9 @@
       <Project>{2525FBA2-ADFF-419D-BB07-325F92AB690C}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Screens\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
