@@ -102,6 +102,8 @@ namespace BugsXNA.Screens
             _gameModel.GameOver -= new EventHandler(_gameModel_GameOver);
             _gameModel.SendEnemyWave(10);
             _gameModel.BoostEnemySpeed();
+            _gameModel.BugModel.ClearBehaviors();
+            _gameModel.BugModel.Velocity = Vector2.Zero; //Make the bug stop right where it died
             var gameOverScreen = new GameOverScreen();
             gameOverScreen.Tapped += gameOverScreen_Tapped;
             ScreenManager.AddScreen(gameOverScreen, null);
