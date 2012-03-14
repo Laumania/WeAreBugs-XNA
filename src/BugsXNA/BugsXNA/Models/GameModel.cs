@@ -40,7 +40,7 @@ namespace BugsXNA.Models
         #endregion
 
         #region public methods
-        public GameModel(BugsGame game)
+        public GameModel(Game game)
         {
             _game = game;
             //IsGameOver = false;
@@ -224,7 +224,7 @@ namespace BugsXNA.Models
         #endregion
 
         #region private variables
-        private BugsGame _game;
+        private Game _game;
         private List<AgentModel> _enemyList;
         private State _state;
         private float _foodThreshold = 20; //disttance at which the bug is considered to have eaten the food.

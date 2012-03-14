@@ -14,7 +14,7 @@ namespace BugsXNA.Controllers
         #endregion
 
         #region public methods
-        public Controller(BugsGame game)
+        public Controller(Game game)
         {
             _game = game;
         }
@@ -31,8 +31,8 @@ namespace BugsXNA.Controllers
         {
             _gameModel = new GameModel(_game);
             //_gameView = new GameView(_gameModel);
-            _gameModel.Width = _game.Width;
-            _gameModel.Height = _game.Height;
+            _gameModel.Width = _game.GraphicsDevice.Viewport.Width;
+            _gameModel.Height = _game.GraphicsDevice.Viewport.Height;
             _gameModel.Initialize();
             _gameModel.Start();
             //_page.LayoutRoot.Children.Add(_gameView);
@@ -130,7 +130,7 @@ namespace BugsXNA.Controllers
         #endregion
 
         #region private variables
-        BugsGame _game;
+        Game _game;
         //StartView _startView;
         //ReadyView _readyView;
         //GameOverView _gameOverView;
