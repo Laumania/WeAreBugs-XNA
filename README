@@ -5,7 +5,7 @@ http://www.farseergames.com/blog/2009/4/30/we-are-bugs-refactored-and-source-rel
 
 This repo includes two version of "We Are Bugs".
 
-BugsSL - A direct port of Jeff's browser Silverlight version to a Silverlight version that runs and works on Windows Phone.
+BugsSL - A direct port of Jeff's Silverlight(browser) version to a Silverlight version that runs and works on Windows Phone.
 BugsXNA - A XNA version of the game.
 
 It's in the BugsXNA project that I have put the work. 
