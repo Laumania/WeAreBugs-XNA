@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
-using BugsXNA.Behaviors;
 using BugsXNA.Common;
 using BugsXNA.Common.GameStateManagement;
 using BugsXNA.Models;
@@ -14,16 +12,14 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace BugsXNA.Screens
 {
-    public class StartScreen : GameScreen
+    public class ReadyScreen : GameScreen
     {
         private Texture2D _background;
         private GameModel _gameModel;
         private ContentManager _content;
         private SpriteFont _font;
-        private float _seekPointRampDistance = 50; //distance at which the bug will start slowing its approach.
-        private float _foodThreshold = 20; //disttance at which the bug is considered to have eaten the food.
 
-        public StartScreen()
+        public ReadyScreen()
         {
             TransitionOffTime = TimeSpan.Zero;
             TransitionOnTime = TimeSpan.Zero;
@@ -44,20 +40,10 @@ namespace BugsXNA.Screens
             _gameModel.Initialize();
             _gameModel.Start();
 
-            _gameModel.BugModel.Add(new SeekPointBehavior(() => _gameModel.GetTarget(), _seekPointRampDistance));
+            _gameModel.BugModel.Position = new Vector2(400, 300);
+            _gameModel.BugModel.Front = new Vector2(0, -1);
 
             base.Activate(instancePreserved);
-        }
-
-        public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
-        {
-            _gameModel.TargetPoint = _gameModel.FoodModel.Position;
-            if (Mathematics.Distance(_gameModel.BugModel.Position, _gameModel.FoodModel.Position) < _foodThreshold)
-            {
-                _gameModel.SetFood();
-            }
-            _gameModel.Update(gameTime);
-            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
 
         public override void Draw(GameTime gameTime)
@@ -66,7 +52,7 @@ namespace BugsXNA.Screens
 
             ScreenManager.SpriteBatch.Begin();
             ScreenManager.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
-            ScreenManager.SpriteBatch.DrawString(_font, "'To a good approximation, all species are insects'", Vector2.Zero, Color.White);
+            ScreenManager.SpriteBatch.DrawString(_font, "Eat the white food dots for points", Vector2.Zero, Color.White);
             ScreenManager.SpriteBatch.End();
         }
 
@@ -86,7 +72,7 @@ namespace BugsXNA.Screens
                 if (gesture.GestureType == GestureType.Tap)
                 {
                     this.ExitScreen();
-                    ScreenManager.AddScreen(new ReadyScreen(), null);
+                    ScreenManager.AddScreen(new PlayScreen(), null);
                 }
             }
             base.HandleInput(gameTime, input);

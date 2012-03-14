@@ -4,7 +4,6 @@ using System.Linq;
 using BugsXNA.Behaviors;
 using BugsXNA.Common;
 using BugsXNA.Common.GameStateManagement;
-using BugsXNA.Controllers;
 using BugsXNA.Models;
 using BugsXNA.Screens;
 using Microsoft.Xna.Framework;
@@ -24,14 +23,14 @@ namespace BugsXNA
     public class BugsGame : Microsoft.Xna.Framework.Game
     {
         private readonly GraphicsDeviceManager _graphics;
-        private readonly ScreenManager screenManager;
+        private readonly ScreenManager _screenManager;
 
         public BugsGame()
         {
             BugsGame.Instance = this;
 
             //Setup touch capabilities
-            TouchPanel.EnabledGestures = GestureType.Tap; 
+            //TouchPanel.EnabledGestures = GestureType.Tap; 
             
             //Instansiate and setup graphics device manager
             _graphics = new GraphicsDeviceManager(this)
@@ -46,8 +45,8 @@ namespace BugsXNA
             Services.AddService(typeof(IScreenFactory), new ScreenFactory());
 
             // Create the screen manager component.
-            screenManager = new ScreenManager(this);
-            Components.Add(screenManager);
+            _screenManager = new ScreenManager(this);
+            Components.Add(_screenManager);
 
             // Hook events on the PhoneApplicationService so we're notified of the application's life cycle
             Microsoft.Phone.Shell.PhoneApplicationService.Current.Launching += new EventHandler<Microsoft.Phone.Shell.LaunchingEventArgs>(GameLaunching);
@@ -121,7 +120,7 @@ namespace BugsXNA
         private void AddStartScreen()
         {
             // We have different menus for Windows Phone to take advantage of the touch interface
-            screenManager.AddScreen(new StartScreen(), null);
+            _screenManager.AddScreen(new StartScreen(), null);
         }
 
         private void GameLaunching(object sender, Microsoft.Phone.Shell.LaunchingEventArgs e)
@@ -132,20 +131,20 @@ namespace BugsXNA
         private void GameActivated(object sender, Microsoft.Phone.Shell.ActivatedEventArgs e)
         {
             // Try to deserialize the screen manager
-            if (!screenManager.Activate(e.IsApplicationInstancePreserved))
-            {
-                // If the screen manager fails to deserialize, add the initial screens
-                AddStartScreen();
-            }
+            //if (!_screenManager.Activate(e.IsApplicationInstancePreserved))
+            //{
+            //    // If the screen manager fails to deserialize, add the initial screens
+            //    AddStartScreen();
+            //}
         }
 
         private void GameDeactivated(object sender, Microsoft.Phone.Shell.DeactivatedEventArgs e)
         {
             // Serialize the screen manager when the game deactivated
-            screenManager.Deactivate();
+            //_screenManager.Deactivate();
         }
 
-        public SpriteBatch SpriteBatch { get { return screenManager.SpriteBatch; } }
+        public SpriteBatch SpriteBatch { get { return _screenManager.SpriteBatch; } }
         public static BugsGame Instance { get; private set; }
     }
 }

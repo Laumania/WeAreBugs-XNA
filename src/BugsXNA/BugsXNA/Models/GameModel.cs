@@ -60,15 +60,15 @@ namespace BugsXNA.Models
             SetFood();
         }
 
-        public void SetState(State state)
-        {
-            if (_state != null)
-            {
-                _state.Exit();
-            }
-            _state = state;
-            _state.Enter();
-        }
+        //public void SetState(State state)
+        //{
+        //    if (_state != null)
+        //    {
+        //        _state.Exit();
+        //    }
+        //    _state = state;
+        //    _state.Enter();
+        //}
 
         public void SetFood()
         {
@@ -106,7 +106,7 @@ namespace BugsXNA.Models
 
         public void Update(GameTime gameTime)
         {
-            if (_state != null) _state.Update(gameTime);
+            //if (_state != null) _state.Update(gameTime);
         }
 
         public void UpdateEnemies(GameTime gameTime)
@@ -226,7 +226,7 @@ namespace BugsXNA.Models
         #region private variables
         private Game _game;
         private List<AgentModel> _enemyList;
-        private State _state;
+        //private State _state;
         private float _foodThreshold = 20; //disttance at which the bug is considered to have eaten the food.
         private float _foodPlacementBorderWidth = 100f; //defines box where food can be placed.
         private float _enemyCreationBufferWidth = 20;

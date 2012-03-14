@@ -41,7 +41,7 @@ namespace BugsXNA.Controllers
         private void ShowStartScreen()
         {
             //_startView = new StartView();
-            //_startView.Clicked += new EventHandler(_startView_Clicked);
+            //_startView.Tapped += new EventHandler(_startView_Clicked);
             //_page.LayoutRoot.Children.Add(_startView);
             var startState = new StartState(_gameModel);
             startState.Clicked += new EventHandler(_startView_Clicked);
@@ -51,7 +51,7 @@ namespace BugsXNA.Controllers
         private void ShowReadyScreen()
         {
             //_readyView = new ReadyView();
-            //_readyView.Clicked += new EventHandler(_readyView_Clicked);
+            //_readyView.Tapped += new EventHandler(_readyView_Clicked);
             //_page.LayoutRoot.Children.Add(_readyView);
             var readyState = new ReadyState(_gameModel);
             readyState.Clicked += new EventHandler(_readyView_Clicked);
@@ -67,7 +67,7 @@ namespace BugsXNA.Controllers
         private void ShowGameOverScreen()
         {
             //_gameOverView = new GameOverView();
-            //_gameOverView.Clicked += new EventHandler(_gameOverView_Clicked);
+            //_gameOverView.Tapped += new EventHandler(_gameOverView_Clicked);
             //_page.LayoutRoot.Children.Add(_gameOverView);
             var gameOverState = new GameOverState(_gameModel);
             gameOverState.Clicked += new EventHandler(_gameOverView_Clicked);
