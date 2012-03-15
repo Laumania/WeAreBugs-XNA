@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace BugsXNA.Screens
 {
-    public class PlayScreen : GameScreen
+    public class PlayScreen : BaseScreen
     {
         private Texture2D _background;
         private GameModel _gameModel;
@@ -20,11 +20,18 @@ namespace BugsXNA.Screens
         private SpriteFont _font;
         private float _seekPointRampDistance = 50; //distance at which the bug will start slowing its approach.
 
-        public PlayScreen()
+        public PlayScreen(GameModel gameModel)
         {
             TransitionOffTime = TimeSpan.Zero;
             TransitionOnTime = TimeSpan.Zero;
             EnabledGestures = GestureType.Tap;
+
+            _gameModel = gameModel;
+            //_gameModel.GameInitialized += new EventHandler(_gameModel_GameInitialized);
+            //_gameModel.EnemyAdded += new GameModel.EnemyAddedEventHandler(_gameModel_EnemyAdded);
+            //_gameModel.ClearingEnemies += new EventHandler(_gameModel_ClearingEnemies);
+            //_gameModel.ScoreChanged += new EventHandler(_gameModel_ScoreChanged);
+            //_gameModel.ScoreVisibilityChanged += new EventHandler(_gameModel_ScoreVisibilityChanged);
         }
 
         public override void Activate(bool instancePreserved)
@@ -35,48 +42,54 @@ namespace BugsXNA.Screens
             _font = _content.Load<SpriteFont>("MenuFont");
             _background = _content.Load<Texture2D>("Background");
 
-            _gameModel = new GameModel(ScreenManager.Game);
-            _gameModel.Width = ScreenManager.Game.GraphicsDevice.Viewport.Width;
-            _gameModel.Height = ScreenManager.Game.GraphicsDevice.Viewport.Height;
-            _gameModel.Initialize();
-            _gameModel.Start();
-            _gameModel.BugModel.Add(new SeekPointBehavior(() => _gameModel.GetTarget(), _seekPointRampDistance));
-            _gameModel.FoodModel.Visible = true;
-            _gameModel.IsGameOver = false;
-            _gameModel.IsScoreVisible = true;
-            _gameModel.Score = 0;
-            _gameModel.GameOver += new EventHandler(_gameModel_GameOver);
+            //_gameModel = new GameModel(ScreenManager.Game);
+            //_gameModel.Width = ScreenManager.Game.GraphicsDevice.Viewport.Width;
+            //_gameModel.Height = ScreenManager.Game.GraphicsDevice.Viewport.Height;
+            //_gameModel.Initialize();
+            //_gameModel.Start();
+            //_gameModel.BugModel.Add(new SeekPointBehavior(() => _gameModel.GetTarget(), _seekPointRampDistance));
+            //_gameModel.FoodModel.Visible = true;
+            //_gameModel.IsGameOver = false;
+            //_gameModel.IsScoreVisible = true;
+            //_gameModel.Score = 0;
+            //_gameModel.GameOver += new EventHandler(_gameModel_GameOver);
 
-            _gameModel.BugModel.Position = new Vector2(400, 300);
-            _gameModel.BugModel.Front = new Vector2(0, -1);
+            //_gameModel.BugModel.Position = new Vector2(400, 300);
+            //_gameModel.BugModel.Front = new Vector2(0, -1);
 
             base.Activate(instancePreserved);
         }
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
-            _gameModel.CheckForEatenFood(gameTime);
-            _gameModel.UpdateEnemies(gameTime);
-
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
-
             ScreenManager.SpriteBatch.Begin();
             ScreenManager.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
+
+            if (_gameModel.IsScoreVisible)
+            {
+                ScreenManager.SpriteBatch.DrawString(_font,
+                                                     _gameModel.Score.ToString(),
+                                                     Vector2.Zero,
+                                                     Color.White);
+            }
+
             ScreenManager.SpriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         public override void Unload()
         {            
-            _gameModel.BugModel.ClearBehaviors();
-            _gameModel.FoodModel.Visible = false;
-            _gameModel.ClearEnemies();
-            _gameModel.IsScoreVisible = false;
+            //_gameModel.BugModel.ClearBehaviors();
+            //_gameModel.FoodModel.Visible = false;
+            //_gameModel.ClearEnemies();
+            //_gameModel.IsScoreVisible = false;
 
-            ScreenManager.Game.Components.Remove(_gameModel.BugModel);
+            //ScreenManager.Game.Components.Remove(_gameModel.BugModel);
 
             if (_content != null)
                 _content.Dispose();

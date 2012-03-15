@@ -9,8 +9,6 @@ namespace BugsXNA.Models
 {
     public class ReadyState : State
     {
-        public event EventHandler Clicked;
-
         #region properties
         #endregion
 
@@ -26,10 +24,6 @@ namespace BugsXNA.Models
 
         public override void Update(GameTime gameTime)
         {
-            if (IsScreenTapped())
-            {
-                if (Clicked != null) Clicked(this, null);
-            }
             //_gameModel.BugModel.Update(gameTime);
         }
 
@@ -40,17 +34,6 @@ namespace BugsXNA.Models
         #endregion
 
         #region private methods
-        private bool IsScreenTapped()
-        {
-            if(TouchPanel.IsGestureAvailable)
-            {
-                var gesture = TouchPanel.ReadGesture();
-                if (gesture.GestureType == GestureType.Tap)
-                    return true;
-            }
-
-            return false;
-        }
         #endregion
 
         #region eventhandlers

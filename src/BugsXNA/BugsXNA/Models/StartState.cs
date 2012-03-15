@@ -11,8 +11,6 @@ namespace BugsXNA.Models
 {
     public class StartState : State
     {
-        public event EventHandler Clicked;
-
         #region properties
         #endregion
 
@@ -27,11 +25,6 @@ namespace BugsXNA.Models
 
         public override void Update(GameTime gameTime)
         {
-            if (IsScreenTapped())
-            {
-                if (Clicked != null) Clicked(this, null);
-            }
-
             _gameModel.TargetPoint = _gameModel.FoodModel.Position;
             //_gameModel.BugModel.Update(gameTime);
 
@@ -39,18 +32,6 @@ namespace BugsXNA.Models
             {
                 _gameModel.SetFood();
             }
-        }
-
-        private bool IsScreenTapped()
-        {
-            if (TouchPanel.IsGestureAvailable)
-            {
-                var gesture = TouchPanel.ReadGesture();
-                if (gesture.GestureType == GestureType.Tap)
-                    return true;
-            }
-
-            return false;
         }
 
         public override void Exit()

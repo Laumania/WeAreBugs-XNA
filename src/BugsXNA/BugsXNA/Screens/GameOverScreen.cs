@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace BugsXNA.Screens
 {
-    public class GameOverScreen : GameScreen
+    public class GameOverScreen : BaseScreen
     {
         public event EventHandler Tapped;
 
@@ -51,7 +51,6 @@ namespace BugsXNA.Screens
             {
                 if (gesture.GestureType == GestureType.Tap)
                 {
-                    this.ExitScreen();
                     if (Tapped != null) Tapped(this, null);
                 }
             }

@@ -5,6 +5,8 @@ using System.Text;
 using BugsXNA.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using BugsXNA.Screens;
+using BugsXNA.Common.GameStateManagement;
 
 namespace BugsXNA.Controllers
 {
@@ -14,9 +16,9 @@ namespace BugsXNA.Controllers
         #endregion
 
         #region public methods
-        public Controller(Game game)
+        public Controller(ScreenManager screenManager)
         {
-            _game = game;
+            _screenManager = screenManager;
         }
 
         public void Initialize()
@@ -29,33 +31,36 @@ namespace BugsXNA.Controllers
         #region private methods
         private void ShowGameScreen()
         {
-            _gameModel = new GameModel(_game);
-            //_gameView = new GameView(_gameModel);
-            _gameModel.Width = _game.GraphicsDevice.Viewport.Width;
-            _gameModel.Height = _game.GraphicsDevice.Viewport.Height;
+            _gameModel = new GameModel(_screenManager.Game);
+            _gameModel.Width = _screenManager.Game.GraphicsDevice.Viewport.Width;
+            _gameModel.Height = _screenManager.Game.GraphicsDevice.Viewport.Height;
             _gameModel.Initialize();
             _gameModel.Start();
+            _screenManager.AddScreen(new PlayScreen(_gameModel), null);
             //_page.LayoutRoot.Children.Add(_gameView);
         }
 
         private void ShowStartScreen()
         {
             //_startView = new StartView();
-            //_startView.Tapped += new EventHandler(_startView_Clicked);
+            //_startView.Tapped += new EventHandler(_startScreen_Tapped);
             //_page.LayoutRoot.Children.Add(_startView);
+
+            var startScreen = new StartScreen();
+            startScreen.Tapped += new EventHandler(_startScreen_Tapped);
+            _screenManager.AddScreen(startScreen, null);
+
             var startState = new StartState(_gameModel);
-            startState.Clicked += new EventHandler(_startView_Clicked);
             _gameModel.SetState(startState);
         }
 
         private void ShowReadyScreen()
         {
-            //_readyView = new ReadyView();
-            //_readyView.Tapped += new EventHandler(_readyView_Clicked);
-            //_page.LayoutRoot.Children.Add(_readyView);
-            var readyState = new ReadyState(_gameModel);
-            readyState.Clicked += new EventHandler(_readyView_Clicked);
-            _gameModel.SetState(readyState);
+            var readyScreen = new ReadyScreen();
+            readyScreen.Tapped += new EventHandler(_readyScreen_Tapped);
+            _screenManager.AddScreen(readyScreen, null);
+
+            _gameModel.SetState(new ReadyState(_gameModel));
         }
 
         private void ShowPlayScreen()
@@ -66,12 +71,11 @@ namespace BugsXNA.Controllers
 
         private void ShowGameOverScreen()
         {
-            //_gameOverView = new GameOverView();
-            //_gameOverView.Tapped += new EventHandler(_gameOverView_Clicked);
-            //_page.LayoutRoot.Children.Add(_gameOverView);
-            var gameOverState = new GameOverState(_gameModel);
-            gameOverState.Clicked += new EventHandler(_gameOverView_Clicked);
-            _gameModel.SetState(gameOverState);
+            var gameOverScreen = new GameOverScreen();
+            gameOverScreen.Tapped += new EventHandler(_gameOverView_Clicked);
+            _screenManager.AddScreen(gameOverScreen, null);
+
+            _gameModel.SetState(new GameOverState(_gameModel));
         }
 
         public void Update(GameTime gameTime)
@@ -97,17 +101,15 @@ namespace BugsXNA.Controllers
         #endregion
 
         #region eventhandlers
-        void _startView_Clicked(object sender, EventArgs e)
+        void _startScreen_Tapped(object sender, EventArgs e)
         {
-            //_page.LayoutRoot.Children.Remove(_startView);
-            //_startView = null;
+            (sender as GameScreen).ExitScreen();
             ShowReadyScreen();
         }
 
-        void _readyView_Clicked(object sender, EventArgs e)
+        void _readyScreen_Tapped(object sender, EventArgs e)
         {
-            //_page.LayoutRoot.Children.Remove(_readyView);
-            //_readyView = null;
+            (sender as GameScreen).ExitScreen();
             ShowPlayScreen();
         }
 
@@ -119,8 +121,7 @@ namespace BugsXNA.Controllers
 
         void _gameOverView_Clicked(object sender, EventArgs e)
         {
-            //_page.LayoutRoot.Children.Remove(_gameOverView);
-            //_gameOverView = null;
+            (sender as GameScreen).ExitScreen();
             ShowReadyScreen();
         }
 
@@ -130,17 +131,13 @@ namespace BugsXNA.Controllers
         #endregion
 
         #region private variables
-        Game _game;
+
+        private ScreenManager _screenManager;
+        private GameModel _gameModel;
         //StartView _startView;
         //ReadyView _readyView;
         //GameOverView _gameOverView;
-
         //GameView _gameView;
-        GameModel _gameModel;
-
-        //DateTime _currentTime;
-        //DateTime _previousTime;
-        //TimeSpan _elapsedTime;
         #endregion
     }
 }
