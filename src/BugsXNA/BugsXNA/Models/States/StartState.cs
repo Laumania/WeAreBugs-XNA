@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BugsXNA.Behaviors;
 using BugsXNA.Common;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input.Touch;
 
-namespace BugsXNA.Models
+namespace BugsXNA.Models.States
 {
     public class StartState : State
     {
