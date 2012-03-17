@@ -7,3 +7,7 @@ while trying to stay as close as possible to the original source.
 - The original states have been rewritten to "Screens". A Screen can be seens as a View+State+Controller if you think in the original Silverlight code
 - I use the "Game State Management" sample from here: http://create.msdn.com/en-US/education/catalog/sample/game_state_management
 - The Controller class is not used anymore, as the logic is spread out to the different Screens.
+
+
+For optimized version:
+- http://spritesheetpacker.codeplex.com

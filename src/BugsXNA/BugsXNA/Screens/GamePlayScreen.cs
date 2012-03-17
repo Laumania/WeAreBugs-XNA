@@ -12,15 +12,16 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace BugsXNA.Screens
 {
-    public class PlayScreen : BaseScreen
+    public class GamePlayScreen : BaseScreen
     {
         private Texture2D _background;
         private GameModel _gameModel;
         private ContentManager _content;
         private SpriteFont _font;
-        private float _seekPointRampDistance = 50; //distance at which the bug will start slowing its approach.
 
-        public PlayScreen(GameModel gameModel)
+        private Vector2 _scorePosition = new Vector2(800 / 2, 0);
+
+        public GamePlayScreen(GameModel gameModel)
         {
             TransitionOffTime = TimeSpan.Zero;
             TransitionOnTime = TimeSpan.Zero;
@@ -30,8 +31,6 @@ namespace BugsXNA.Screens
             _gameModel.GameInitialized += new EventHandler(_gameModel_GameInitialized);
             _gameModel.EnemyAdded += new GameModel.EnemyAddedEventHandler(_gameModel_EnemyAdded);
             _gameModel.ClearingEnemies += new EventHandler(_gameModel_ClearingEnemies);
-            //_gameModel.ScoreChanged += new EventHandler(_gameModel_ScoreChanged);
-            //_gameModel.ScoreVisibilityChanged += new EventHandler(_gameModel_ScoreVisibilityChanged);
         }
 
         public override void Activate(bool instancePreserved)
@@ -77,8 +76,8 @@ namespace BugsXNA.Screens
             if (_gameModel.IsScoreVisible)
             {
                 ScreenManager.SpriteBatch.DrawString(_font,
-                                                     _gameModel.Score.ToString(),
-                                                     Vector2.Zero,
+                                                     _gameModel.Score.ToString("00"),
+                                                     _scorePosition,
                                                      Color.White);
             }
 
@@ -89,13 +88,6 @@ namespace BugsXNA.Screens
 
         public override void Unload()
         {            
-            //_gameModel.BugModel.ClearBehaviors();
-            //_gameModel.FoodModel.Visible = false;
-            //_gameModel.ClearEnemies();
-            //_gameModel.IsScoreVisible = false;
-
-            //ScreenManager.Game.Components.Remove(_gameModel.BugModel);
-
             if (_content != null)
                 _content.Dispose();
             base.Unload();
