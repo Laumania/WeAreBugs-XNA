@@ -32,12 +32,11 @@ namespace BugsXNA.Controllers
         private void ShowGameScreen()
         {
             _gameModel = new GameModel(_screenManager.Game);
+            _screenManager.AddScreen(new PlayScreen(_gameModel), null);
             _gameModel.Width = _screenManager.Game.GraphicsDevice.Viewport.Width;
             _gameModel.Height = _screenManager.Game.GraphicsDevice.Viewport.Height;
             _gameModel.Initialize();
             _gameModel.Start();
-            _screenManager.AddScreen(new PlayScreen(_gameModel), null);
-            //_page.LayoutRoot.Children.Add(_gameView);
         }
 
         private void ShowStartScreen()

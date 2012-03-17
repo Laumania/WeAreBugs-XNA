@@ -17,6 +17,7 @@ namespace BugsXNA.Models
         public BugModel BugModel { get; set; }
         public FoodModel FoodModel { get; set; }
         public bool IsGameOver { get; set; }
+        public IEnumerable<AgentModel> EnemyList { get { return _enemyList.AsEnumerable(); } } 
 
         public bool IsScoreVisible
         {
@@ -53,6 +54,7 @@ namespace BugsXNA.Models
             InitializeBug(new Vector2(400, 320));
             InitializeFood();
             InitializeEnemies();
+            GameInitialized(this, null);
         }
 
         public void Start()
@@ -90,17 +92,13 @@ namespace BugsXNA.Models
                 enemyModel.Add(new PursueAgentBehavior(_enemyAtBugThreshold, _enemyPredictionFactor, BugModel));
                 enemyModel.Add(new SeperationBehavior(_enemySeperationFactor, _enemyList));
                 _enemyList.Add(enemyModel);
-                _game.Components.Add(enemyModel);
-                //if (EnemyAdded != null) EnemyAdded(this, new EnemyAddedEventArgs(enemyModel));
+                if (EnemyAdded != null) EnemyAdded(this, new EnemyAddedEventArgs(enemyModel));
             }
         }
 
         public void ClearEnemies()
         {
-            foreach (var enemy in _enemyList)
-            {
-                _game.Components.Remove(enemy);
-            }
+            if (ClearingEnemies != null) ClearingEnemies(this, null);
             _enemyList.Clear();
         }
 
@@ -162,14 +160,12 @@ namespace BugsXNA.Models
             BugModel.MaxForce = .07f;
             BugModel.Position = startPoint;
             BugModel.Initialize();
-            _game.Components.Add(BugModel);
         }
 
         private void InitializeFood()
         {
             FoodModel = new FoodModel(_game);
             FoodModel.Initialize();
-            _game.Components.Add(FoodModel);
         }
 
         private void InitializeEnemies()
@@ -213,14 +209,14 @@ namespace BugsXNA.Models
         #endregion
 
         #region events
-        //public event EventHandler GameInitialized;
+        public event EventHandler GameInitialized;
         public event EventHandler GameOver;
         //public event EventHandler ScoreChanged;
         //public event EventHandler ScoreVisibilityChanged;
-        //public event EventHandler ClearingEnemies;
-        //public event EnemyAddedEventHandler EnemyAdded;
+        public event EventHandler ClearingEnemies;
+        public event EnemyAddedEventHandler EnemyAdded;
 
-        //public delegate void EnemyAddedEventHandler(object sender, EnemyAddedEventArgs e);
+        public delegate void EnemyAddedEventHandler(object sender, EnemyAddedEventArgs e);
         #endregion
 
         #region private variables
@@ -241,8 +237,15 @@ namespace BugsXNA.Models
         private Random _rnd = new Random();
         private bool _isScoreVisible;
         private int _score = 0;
-
         #endregion
+    }
 
+    public class EnemyAddedEventArgs : EventArgs
+    {
+        public EnemyModel EnemyModel { get; private set; }
+        public EnemyAddedEventArgs(EnemyModel enemyModel)
+        {
+            this.EnemyModel = enemyModel;
+        }
     }
 }

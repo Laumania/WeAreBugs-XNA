@@ -27,9 +27,9 @@ namespace BugsXNA.Screens
             EnabledGestures = GestureType.Tap;
 
             _gameModel = gameModel;
-            //_gameModel.GameInitialized += new EventHandler(_gameModel_GameInitialized);
-            //_gameModel.EnemyAdded += new GameModel.EnemyAddedEventHandler(_gameModel_EnemyAdded);
-            //_gameModel.ClearingEnemies += new EventHandler(_gameModel_ClearingEnemies);
+            _gameModel.GameInitialized += new EventHandler(_gameModel_GameInitialized);
+            _gameModel.EnemyAdded += new GameModel.EnemyAddedEventHandler(_gameModel_EnemyAdded);
+            _gameModel.ClearingEnemies += new EventHandler(_gameModel_ClearingEnemies);
             //_gameModel.ScoreChanged += new EventHandler(_gameModel_ScoreChanged);
             //_gameModel.ScoreVisibilityChanged += new EventHandler(_gameModel_ScoreVisibilityChanged);
         }
@@ -42,23 +42,28 @@ namespace BugsXNA.Screens
             _font = _content.Load<SpriteFont>("MenuFont");
             _background = _content.Load<Texture2D>("Background");
 
-            //_gameModel = new GameModel(ScreenManager.Game);
-            //_gameModel.Width = ScreenManager.Game.GraphicsDevice.Viewport.Width;
-            //_gameModel.Height = ScreenManager.Game.GraphicsDevice.Viewport.Height;
-            //_gameModel.Initialize();
-            //_gameModel.Start();
-            //_gameModel.BugModel.Add(new SeekPointBehavior(() => _gameModel.GetTarget(), _seekPointRampDistance));
-            //_gameModel.FoodModel.Visible = true;
-            //_gameModel.IsGameOver = false;
-            //_gameModel.IsScoreVisible = true;
-            //_gameModel.Score = 0;
-            //_gameModel.GameOver += new EventHandler(_gameModel_GameOver);
-
-            //_gameModel.BugModel.Position = new Vector2(400, 300);
-            //_gameModel.BugModel.Front = new Vector2(0, -1);
-
             base.Activate(instancePreserved);
         }
+
+        protected void _gameModel_GameInitialized(object sender, EventArgs e)
+        {
+            Components.Add(_gameModel.BugModel);
+            Components.Add(_gameModel.FoodModel);
+        }
+
+        protected void _gameModel_EnemyAdded(object sender, EnemyAddedEventArgs e)
+        {
+            Components.Add(e.EnemyModel);
+        }
+
+        protected void _gameModel_ClearingEnemies(object sender, EventArgs e)
+        {
+            foreach (var enemy in _gameModel.EnemyList)
+            {
+                Components.Remove(enemy);
+            }
+        }
+
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
