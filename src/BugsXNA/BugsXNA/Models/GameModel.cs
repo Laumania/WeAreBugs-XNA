@@ -114,7 +114,6 @@ namespace BugsXNA.Models
             {
                 float distance = Mathematics.Distance(enemyModel.Position, BugModel.Position);
                 enemyModel.Excitement = Math.Max(0, (_enemyExcitementThreshold - distance) / _enemyExcitementThreshold);
-                //enemyModel.Update(gameTime);
                 if (distance < 15)
                 {
                     bugIsCaught = true;
