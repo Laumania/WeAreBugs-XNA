@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BugsXNA.Behaviors;
+using BugsXNA.Common;
 using BugsXNA.Common.GameStateManagement;
 using BugsXNA.Models;
 using Microsoft.Xna.Framework;
@@ -18,6 +19,7 @@ namespace BugsXNA.Screens
         private GameModel _gameModel;
         private ContentManager _content;
         private SpriteFont _font;
+        private Rectangle _sourceRectangle;
 
         private Vector2 _scorePosition = new Vector2(800 / 2, 0);
 
@@ -39,7 +41,10 @@ namespace BugsXNA.Screens
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             _font = _content.Load<SpriteFont>("MenuFont");
-            _background = _content.Load<Texture2D>("Background");
+           
+            var spriteSheet = ScreenManager.Game.Content.Load<SpriteSheet>("SpriteSheet1");
+            _background = spriteSheet.Texture;
+            _sourceRectangle = spriteSheet.SourceRectangle("Background");
 
             base.Activate(instancePreserved);
         }
@@ -71,7 +76,15 @@ namespace BugsXNA.Screens
         public override void Draw(GameTime gameTime)
         {
             ScreenManager.SpriteBatch.Begin();
-            ScreenManager.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
+            ScreenManager.SpriteBatch.Draw(_background,
+                                 Vector2.Zero,
+                                 _sourceRectangle,
+                                 Color.White,
+                                 0f,
+                                 Vector2.One,
+                                 1f,
+                                 SpriteEffects.None,
+                                 1.0f);
 
             if (_gameModel.IsScoreVisible)
             {

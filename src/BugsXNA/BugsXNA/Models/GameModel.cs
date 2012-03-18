@@ -153,11 +153,12 @@ namespace BugsXNA.Models
         #region private methods
         private void InitializeBug(Vector2 startPoint)
         {
+            var test = 50f; 
             BugModel = new BugModel(_game);
             BugModel.Front = new Vector2(0, -1);
             BugModel.Mass = .2f;
-            BugModel.MaxSpeed = 4.5f;
-            BugModel.MaxForce = .07f;
+            BugModel.MaxSpeed = 4.5f * test;
+            BugModel.MaxForce = .07f * test;
             BugModel.Position = startPoint;
             BugModel.Initialize();
         }

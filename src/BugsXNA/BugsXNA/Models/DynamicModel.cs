@@ -56,12 +56,12 @@ namespace BugsXNA.Models
 
         public override void Draw(GameTime gameTime)
         {
-            var origin = new Vector2(Texture.Width / 2, Texture.Height / 2); //This to make the rotation point the center
+            var origin = new Vector2(SourceRectangle.Width / 2, SourceRectangle.Height / 2); //This to make the rotation point the center
             base.Draw(gameTime);
             BugsGame.Instance.SpriteBatch.Begin();
             BugsGame.Instance.SpriteBatch.Draw(Texture,
                                  Position,
-                                 new Rectangle(0, 0, Texture.Width, Texture.Height),
+                                 SourceRectangle,
                                  Color.White,
                                  Rotation,
                                  origin,
@@ -76,5 +76,6 @@ namespace BugsXNA.Models
         public float Scale { get; set; }
         public Vector2 Front { get; set; }
         protected Texture2D Texture { get; set; }
+        public Rectangle SourceRectangle { get; protected set; }
     }
 }

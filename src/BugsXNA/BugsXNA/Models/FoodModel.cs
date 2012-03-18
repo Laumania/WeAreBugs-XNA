@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BugsXNA.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -29,7 +30,9 @@ namespace BugsXNA.Models
         protected override void LoadContent()
         {
             base.LoadContent();
-            Texture = Game.Content.Load<Texture2D>("Food");
+            var spriteSheet = Game.Content.Load<SpriteSheet>("SpriteSheet1");
+            Texture = spriteSheet.Texture;
+            SourceRectangle = spriteSheet.SourceRectangle("Food");
         }
 
         public override void Update(GameTime gameTime)

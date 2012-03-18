@@ -89,6 +89,7 @@
     <Compile Include="Common\GameStateManagement\ScreenFactory.cs" />
     <Compile Include="Common\GameStateManagement\ScreenManager.cs" />
     <Compile Include="Common\Mathematics.cs" />
+    <Compile Include="Common\SpriteSheet.cs" />
     <Compile Include="Controllers\Controller.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -143,6 +144,10 @@
       <Name>BugsXNAContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
       <Project>{2525FBA2-ADFF-419D-BB07-325F92AB690C}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SpriteSheetPipeline\SpriteSheetPipeline.csproj">
+      <Project>{D8ECDB68-EB76-49F4-A5E0-21620226F5CC}</Project>
+      <Name>SpriteSheetPipeline</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

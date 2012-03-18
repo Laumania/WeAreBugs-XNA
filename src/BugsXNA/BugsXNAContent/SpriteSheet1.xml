@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <Asset Type="System.String[]">
+    <Item>Background.png</Item>
+    <Item>Blank.png</Item>
+    <Item>Bug.png</Item>
+    <Item>Enemy.png</Item>
+    <Item>Food.png</Item>
+  </Asset>
+</XnaContent>

@@ -6,3 +6,4 @@ obj/
 *.user
 *.cachefile
 PerformanceLogs/
+*_lores.png
