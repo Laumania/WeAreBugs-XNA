@@ -18,13 +18,9 @@ namespace BugsXNA.Screens
     {
         public event EventHandler Tapped;
 
-        //private Texture2D _background;
-        //private GameModel _gameModel;
         private ContentManager _content;
         private SpriteFont _font;
-        //private float _seekPointRampDistance = 50; //distance at which the bug will start slowing its approach.
-        //private float _foodThreshold = 20; //disttance at which the bug is considered to have eaten the food.
-
+        
         public StartScreen()
         {
             TransitionOffTime = TimeSpan.Zero;
@@ -39,27 +35,12 @@ namespace BugsXNA.Screens
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             _font = _content.Load<SpriteFont>("MenuFont");
-            //_background = _content.Load<Texture2D>("Background");
-
-            //_gameModel = new GameModel(ScreenManager.Game);
-            //_gameModel.Width = ScreenManager.Game.GraphicsDevice.Viewport.Width;
-            //_gameModel.Height = ScreenManager.Game.GraphicsDevice.Viewport.Height;
-            //_gameModel.Initialize();
-            //_gameModel.Start();
-
-            //_gameModel.BugModel.Add(new SeekPointBehavior(() => _gameModel.GetTarget(), _seekPointRampDistance));
-
+        
             base.Activate(instancePreserved);
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
-            //_gameModel.TargetPoint = _gameModel.FoodModel.Position;
-            //if (Mathematics.Distance(_gameModel.BugModel.Position, _gameModel.FoodModel.Position) < _foodThreshold)
-            //{
-            //    _gameModel.SetFood();
-            //}
-            //_gameModel.Update(gameTime);
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
 
@@ -68,8 +49,25 @@ namespace BugsXNA.Screens
             base.Draw(gameTime);
 
             ScreenManager.SpriteBatch.Begin();
-            //ScreenManager.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
-            ScreenManager.SpriteBatch.DrawString(_font, "'To a good approximation, all species are insects'", Vector2.Zero, Color.White);
+            ScreenManager.SpriteBatch.DrawString(_font, 
+                                                 "'To a good approximation, all species are insects' -Robert May", 
+                                                 new Vector2(70, 100), 
+                                                 Color.White);
+
+            ScreenManager.SpriteBatch.DrawString(_font,
+                                                 "\"We Are Bugs!\"",
+                                                 new Vector2(300, 300),
+                                                 Color.White);
+
+            ScreenManager.SpriteBatch.DrawString(_font,
+                                                 "Created by Jeff Weber",
+                                                 new Vector2(270, 350),
+                                                 Color.White);
+
+            ScreenManager.SpriteBatch.DrawString(_font,
+                                                 "Ported to XNA by Mads Laumann",
+                                                 new Vector2(230, 380),
+                                                 Color.White);
             ScreenManager.SpriteBatch.End();
         }
 

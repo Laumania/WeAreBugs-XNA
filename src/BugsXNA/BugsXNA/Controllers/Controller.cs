@@ -33,20 +33,15 @@ namespace BugsXNA.Controllers
         private void ShowGameScreen()
         {
             _gameModel = new GameModel(_screenManager.Game);
+            _screenManager.AddScreen(new GamePlayScreen(_gameModel), null);
             _gameModel.Width = _screenManager.Game.GraphicsDevice.Viewport.Width;
             _gameModel.Height = _screenManager.Game.GraphicsDevice.Viewport.Height;
             _gameModel.Initialize();
             _gameModel.Start();
-            _screenManager.AddScreen(new PlayScreen(_gameModel), null);
-            //_page.LayoutRoot.Children.Add(_gameView);
         }
 
         private void ShowStartScreen()
         {
-            //_startView = new StartView();
-            //_startView.Tapped += new EventHandler(_startScreen_Tapped);
-            //_page.LayoutRoot.Children.Add(_startView);
-
             var startScreen = new StartScreen();
             startScreen.Tapped += new EventHandler(_startScreen_Tapped);
             _screenManager.AddScreen(startScreen, null);
@@ -83,7 +78,6 @@ namespace BugsXNA.Controllers
         {
             UpdateTargetPoint();
             if (_gameModel != null) _gameModel.Update(gameTime);
-            //if (_gameView != null) _gameView.Update();
         }
 
         private void UpdateTargetPoint()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BugsXNA.Behaviors;
 using BugsXNA.Common;
+using BugsXNA.Common.DebugTools;
 using BugsXNA.Common.GameStateManagement;
 using BugsXNA.Models;
 using BugsXNA.Screens;
@@ -23,6 +24,7 @@ namespace BugsXNA
         private readonly GraphicsDeviceManager _graphics;
         private readonly ScreenManager _screenManager;
         private readonly Controller _controller;
+        private DebugSystem _debugSystem;
 
         public BugsGame()
         {
@@ -46,13 +48,10 @@ namespace BugsXNA
 
             _controller = new Controller(_screenManager);
 
-            // Hook events on the PhoneApplicationService so we're notified of the application's life cycle
-            //Microsoft.Phone.Shell.PhoneApplicationService.Current.Launching += new EventHandler<Microsoft.Phone.Shell.LaunchingEventArgs>(GameLaunching);
-            //Microsoft.Phone.Shell.PhoneApplicationService.Current.Activated += new EventHandler<Microsoft.Phone.Shell.ActivatedEventArgs>(GameActivated);
-            //Microsoft.Phone.Shell.PhoneApplicationService.Current.Deactivated += new EventHandler<Microsoft.Phone.Shell.DeactivatedEventArgs>(GameDeactivated);
-            
             //Set Content root directory
             Content.RootDirectory = "Content";
+
+            _debugSystem = DebugSystem.Initialize(this, "MenuFont");
 
             // Frame rate is 30 fps by default for Windows Phone
             // The original "WeAreBugs" runs at 60 fps - so we do that too in XNA
@@ -97,6 +96,11 @@ namespace BugsXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            _debugSystem.TimeRuler.StartFrame();
+            _debugSystem.TimeRuler.BeginMark("Update", Color.Blue);
+            _debugSystem.FpsCounter.Visible = true;
+            _debugSystem.TimeRuler.Visible = true;
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -104,6 +108,8 @@ namespace BugsXNA
             _controller.Update(gameTime);
 
             base.Update(gameTime);
+
+            _debugSystem.TimeRuler.EndMark("Update");
         }
 
         /// <summary>
@@ -112,35 +118,13 @@ namespace BugsXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            _debugSystem.TimeRuler.BeginMark("Draw", Color.Yellow);
+
             GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
+
+            _debugSystem.TimeRuler.EndMark("Draw");
         }
-
-        //private void AddStartScreen()
-        //{
-        //    _screenManager.AddScreen(new StartScreen(), null);
-        //}
-
-        //private void GameLaunching(object sender, Microsoft.Phone.Shell.LaunchingEventArgs e)
-        //{
-        //    //AddStartScreen();
-        //}
-
-        //private void GameActivated(object sender, Microsoft.Phone.Shell.ActivatedEventArgs e)
-        //{
-        //    // Try to deserialize the screen manager
-        //    //if (!_screenManager.Activate(e.IsApplicationInstancePreserved))
-        //    //{
-        //    //    // If the screen manager fails to deserialize, add the initial screens
-        //    //    AddStartScreen();
-        //    //}
-        //}
-
-        //private void GameDeactivated(object sender, Microsoft.Phone.Shell.DeactivatedEventArgs e)
-        //{
-        //    // Serialize the screen manager when the game deactivated
-        //    //_screenManager.Deactivate();
-        //}
 
         public SpriteBatch SpriteBatch { get { return _screenManager.SpriteBatch; } }
         public static BugsGame Instance { get; private set; }

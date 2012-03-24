@@ -41,7 +41,16 @@ namespace BugsXNA.Screens
             base.Draw(gameTime);
 
             ScreenManager.SpriteBatch.Begin();
-            ScreenManager.SpriteBatch.DrawString(_font, "Game Over dude!", Vector2.Zero, Color.White);
+            ScreenManager.SpriteBatch.DrawString(_font,
+                                                 "CHOMP! CHOMP!", 
+                                                 new Vector2(345, 150), 
+                                                 Color.White);
+
+            ScreenManager.SpriteBatch.DrawString(_font,
+                                                 "You're Dead!",
+                                                 new Vector2(350, 180),
+                                                 Color.White);
+
             ScreenManager.SpriteBatch.End();
         }
 

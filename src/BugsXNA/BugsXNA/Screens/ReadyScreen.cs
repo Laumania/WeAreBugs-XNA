@@ -16,8 +16,6 @@ namespace BugsXNA.Screens
     {
         public event EventHandler Tapped;
 
-        //private Texture2D _background;
-        //private GameModel _gameModel;
         private ContentManager _content;
         private SpriteFont _font;
 
@@ -35,16 +33,6 @@ namespace BugsXNA.Screens
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             _font = _content.Load<SpriteFont>("MenuFont");
-            //_background = _content.Load<Texture2D>("Background");
-
-            //_gameModel = new GameModel(ScreenManager.Game);
-            //_gameModel.Width = ScreenManager.Game.GraphicsDevice.Viewport.Width;
-            //_gameModel.Height = ScreenManager.Game.GraphicsDevice.Viewport.Height;
-            //_gameModel.Initialize();
-            //_gameModel.Start();
-
-            //_gameModel.BugModel.Position = new Vector2(400, 300);
-            //_gameModel.BugModel.Front = new Vector2(0, -1);
 
             base.Activate(instancePreserved);
         }
@@ -54,15 +42,21 @@ namespace BugsXNA.Screens
             base.Draw(gameTime);
 
             ScreenManager.SpriteBatch.Begin();
-            //ScreenManager.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
-            ScreenManager.SpriteBatch.DrawString(_font, "Eat the white food dots for points", Vector2.Zero, Color.White);
+            ScreenManager.SpriteBatch.DrawString(_font, 
+                                                 "Eat the white food dots for points", 
+                                                 new Vector2(220, 200), 
+                                                 Color.White);
+
+            ScreenManager.SpriteBatch.DrawString(_font,
+                                                 "Steer by touching the screen where you want to bug to go",
+                                                 new Vector2(100, 350),
+                                                 Color.White);
+
             ScreenManager.SpriteBatch.End();
         }
 
         public override void Unload()
         {
-            //ScreenManager.Game.Components.Remove(_gameModel.BugModel);
-
             if (_content != null)
                 _content.Dispose();
             base.Unload();

@@ -7,11 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BugsXNA.Common
 {
-	/// <summary>
-	/// A class to assist with being able to nest game components inside of each other, provides support for all of the
-	/// same functionality the game object performs on components with the addition of being neutral to where it resides
-	/// in the hierarchy.
-	/// </summary>
 	public class GameComponentManager : Collection<IGameComponent>, IGameComponent, IUpdateable, IDrawable, IDisposable
 	{
 		#region Fields
