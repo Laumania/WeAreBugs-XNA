@@ -99,19 +99,19 @@
     <Compile Include="Models\EnemyModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
     <Compile Include="Models\GameModel.cs" />
-    <Compile Include="Models\GameOverState.cs">
+    <Compile Include="Models\States\GameOverState.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\PlayState.cs">
+    <Compile Include="Models\States\PlayState.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ReadyState.cs">
+    <Compile Include="Models\States\ReadyState.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\StartState.cs">
+    <Compile Include="Models\States\StartState.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\State.cs">
+    <Compile Include="Models\States\State.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

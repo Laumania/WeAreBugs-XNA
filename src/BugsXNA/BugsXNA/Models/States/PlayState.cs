@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BugsXNA.Behaviors;
 using Microsoft.Xna.Framework;
 
-namespace BugsXNA.Models
+namespace BugsXNA.Models.States
 {
     public class PlayState : State
     {

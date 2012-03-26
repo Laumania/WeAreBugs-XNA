@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BugsXNA.Behaviors;
 using BugsXNA.Common;
+using BugsXNA.Models.States;
 using Microsoft.Xna.Framework;
 
 namespace BugsXNA.Models

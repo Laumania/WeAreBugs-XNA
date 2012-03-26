@@ -1,35 +1,31 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input.Touch;
 
-namespace BugsXNA.Models
+namespace BugsXNA.Models.States
 {
-    public class ReadyState : State
+    public class GameOverState : State
     {
         #region properties
+        public GameOverState(GameModel gameModel)
+            : base(gameModel) { }
+
         #endregion
 
         #region public methods
-        public ReadyState(GameModel gameModel)
-            : base(gameModel) { }
-
         public override void Enter()
         {
-            _gameModel.BugModel.Position = new Vector2(400, 300);
-            _gameModel.BugModel.Front = new Vector2(0, -1);
+            _gameModel.SendEnemyWave(10);
+            _gameModel.BoostEnemySpeed();
         }
 
         public override void Update(GameTime gameTime)
         {
-            //_gameModel.BugModel.Update(gameTime);
+            _gameModel.UpdateEnemies(gameTime);
         }
 
         public override void Exit()
         {
-
+            _gameModel.ClearEnemies();
+            _gameModel.IsScoreVisible = false;
         }
         #endregion
 
