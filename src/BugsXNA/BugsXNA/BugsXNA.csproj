@@ -71,16 +71,6 @@
     <Compile Include="Behaviors\PursueAgentBehavior.cs" />
     <Compile Include="Behaviors\SeekPointBehavior.cs" />
     <Compile Include="Behaviors\SeperationBehavior.cs" />
-    <Compile Include="Common\DebugTools\DebugCommandUI.cs" />
-    <Compile Include="Common\DebugTools\DebugManager.cs" />
-    <Compile Include="Common\DebugTools\DebugSystem.cs" />
-    <Compile Include="Common\DebugTools\FpsCounter.cs" />
-    <Compile Include="Common\DebugTools\IDebugCommandHost.cs" />
-    <Compile Include="Common\DebugTools\KeyboardUtils.cs" />
-    <Compile Include="Common\DebugTools\Layout.cs" />
-    <Compile Include="Common\DebugTools\RemoteDebugCommand.cs" />
-    <Compile Include="Common\DebugTools\StringBuilderExtensions.cs" />
-    <Compile Include="Common\DebugTools\TimeRuler.cs" />
     <Compile Include="Common\GameComponentManager.cs" />
     <Compile Include="Common\GameStateManagement\GameScreen.cs" />
     <Compile Include="Common\GameStateManagement\InputAction.cs" />

@@ -1,20 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using BugsXNA.Behaviors;
-using BugsXNA.Common;
-using BugsXNA.Common.DebugTools;
 using BugsXNA.Common.GameStateManagement;
-using BugsXNA.Models;
-using BugsXNA.Screens;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-using Microsoft.Xna.Framework.Media;
 using BugsXNA.Controllers;
 
 namespace BugsXNA
@@ -24,7 +12,6 @@ namespace BugsXNA
         private readonly GraphicsDeviceManager _graphics;
         private readonly ScreenManager _screenManager;
         private readonly Controller _controller;
-        private DebugSystem _debugSystem;
 
         public BugsGame()
         {
@@ -50,8 +37,6 @@ namespace BugsXNA
 
             //Set Content root directory
             Content.RootDirectory = "Content";
-
-            _debugSystem = DebugSystem.Initialize(this, "MenuFont");
 
             // Frame rate is 30 fps by default for Windows Phone
             // The original "WeAreBugs" runs at 60 fps - so we do that too in XNA
@@ -96,11 +81,6 @@ namespace BugsXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            _debugSystem.TimeRuler.StartFrame();
-            _debugSystem.TimeRuler.BeginMark("Update", Color.Blue);
-            _debugSystem.FpsCounter.Visible = true;
-            _debugSystem.TimeRuler.Visible = true;
-
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -108,8 +88,6 @@ namespace BugsXNA
             _controller.Update(gameTime);
 
             base.Update(gameTime);
-
-            _debugSystem.TimeRuler.EndMark("Update");
         }
 
         /// <summary>
@@ -118,12 +96,8 @@ namespace BugsXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            _debugSystem.TimeRuler.BeginMark("Draw", Color.Yellow);
-
             GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
-
-            _debugSystem.TimeRuler.EndMark("Draw");
         }
 
         public SpriteBatch SpriteBatch { get { return _screenManager.SpriteBatch; } }
