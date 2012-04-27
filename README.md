@@ -1,12 +1,13 @@
 Welcome to WeAreBugs-XNA
 
-WeAreBugs-XNA is a XNA port of the game "We Are Bugs" by Jeff Weber
-http://www.farseergames.com/blog/2009/4/30/we-are-bugs-refactored-and-source-released.html
+WeAreBugs-XNA is a XNA port of the game "We Are Bugs" by [Jeff Weber](http://www.farseergames.com/blog/2009/4/30/we-are-bugs-refactored-and-source-released.html)
+
 
 This project includes two versions of "We Are Bugs".
 
-BugsSL - A direct port of Jeff's Silverlight(browser) version to a Silverlight version that runs and works on Windows Phone.
-BugsXNA - A XNA version of the game.
+- **BugsSL** - A direct port of Jeff's Silverlight(browser) version to a Silverlight version that runs and works on Windows Phone.
+
+- **BugsXNA** - A XNA version of the game.
 
 It's in the BugsXNA project that I have put the work. 
 The goal is to keep the source(XNA) as close to the original(Silverlight) one, but still being true to how XNA do things.
@@ -27,5 +28,4 @@ This can be used as inspiration.
 
 If you have questions, feel free to contact my via GitHub or my blog - http://www.laumania.net
 
-
-- Enjoy & stay tuned :)
+Enjoy & stay tuned :)
