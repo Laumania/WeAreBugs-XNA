@@ -1,4 +1,4 @@
-Welcome to WeAreBugs-XNA
+##WeAreBugs-XNA
 
 WeAreBugs-XNA is a XNA port of the game "We Are Bugs" by [Jeff Weber](http://www.farseergames.com/blog/2009/4/30/we-are-bugs-refactored-and-source-released.html)
 
